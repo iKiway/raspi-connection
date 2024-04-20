@@ -1,10 +1,12 @@
 import socket
 
-host = socket.gethostname()
-port = 12345                   # The same port as used by the server
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((host, port))
-s.sendall(b'Hello, world')
-data = s.recv(1024)
-s.close()
-print('Received', repr(data))
+HOST = '192.168.178.157'  # The server's hostname or IP address
+PORT = 65432        # The port used by the server
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+  s.connect((HOST, PORT))
+  message = "Hello, server! This is a client."
+  s.sendall(message.encode())
+  data = s.recv(1024)
+
+print(f"Received from server: {data.decode()}")
