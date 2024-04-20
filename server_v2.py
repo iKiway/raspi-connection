@@ -26,5 +26,5 @@ try:
             conn, addr = s.accept()
             client_thread = threading.Thread(target=handle_client, args=(conn, addr))
             client_thread.start()
-except:
-    print("Error in server_v2.py")
+except Exception as e:
+    print("Error in server_v2.py" + e)
