@@ -4,7 +4,7 @@ from threading import Thread
 import socket, time
 
 VERBOSE = False
-IP_ADDRESS = "192.168.0.17"
+IP_ADDRESS = "192.168.178.157"
 IP_PORT = 22000
 
 def debug(text):
