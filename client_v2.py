@@ -1,7 +1,7 @@
 import socket
 import time
 
-HOST = ''  # The server's hostname or IP address
+HOST = '10.42.0.1'  # The server's hostname or IP address
 PORT = 65432        # The port used by the server
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -10,7 +10,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.sendall(message.encode())
     data = s.recv(1024)
     print(f"Received from server: {data.decode()}")
-    time.sleep(20)
+    time.sleep(2)
     s.sendall(message.encode())
     data = s.recv(1024)
     print(f"Received from server: {data.decode()}")
