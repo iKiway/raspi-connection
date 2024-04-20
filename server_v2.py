@@ -1,7 +1,7 @@
 import socket
 import threading
 
-HOST = '10.42.0.1'  # Standard loopback interface address (localhost)
+HOST = 'dronepi'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
 try:
