@@ -1,26 +1,27 @@
 import socket
+import threading
 
-host = ''        # Symbolic name meaning all available interfaces
-port = 12345     # Arbitrary non-privileged port
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((host, port))
+HOST = '192.168.178.157'  # Standard loopback interface address (localhost)
+PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
-print( host , port)
-s.listen(1)
-conn, addr = s.accept()
-print('Connected by', addr)
-while True:
+def handle_client(conn, addr):
+  """Handles a client connection by receiving and responding to messages."""
+  print(f"Connected by {addr}")
+  while True:
+    data = conn.recv(1024)
+    if not data:
+      break
+    print(f"Received: {data.decode()}")
+    response = f"Hello, {addr}! You sent: {data.decode()}"
+    conn.sendall(response.encode())
+  conn.close()
+  print(f"Client {addr} disconnected")
 
-    try:
-        data = conn.recv(1024)
-
-        if not data: break
-
-        print( "Client Says: "+data)
-        conn.sendall("Server Says:hi")
-
-    except socket.error:
-        print( "Error Occured.")
-        break
-
-conn.close()
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+  s.bind((HOST, PORT))
+  s.listen()
+  print(f"Server listening on {HOST}:{PORT}")
+  while True:
+    conn, addr = s.accept()
+    client_thread = threading.Thread(target=handle_client, args=(conn, addr))
+    client_thread.start()
