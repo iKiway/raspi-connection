@@ -18,7 +18,7 @@ try:
             
             m ='{"id": 2, "name": "abc"}'
             
-            conn.sendall(json.dumps(m).encode("utf-8"))
+            conn.sendall(response)
         conn.close()
         print(f"Client {addr} disconnected")
 
