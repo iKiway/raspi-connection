@@ -17,9 +17,9 @@ try:
             print(f"Received: {data.decode()}")
             response = f"Hello, {addr}! You sent: {data.decode()}"
             response_data = bytearray(response, 'utf8')
-            size = len(data)
+            size = len(response_data)
             conn.sendall(struct.pack("!H", size))
-            conn.sendall(response)
+            conn.sendall(response_data)
         conn.close()
         print(f"Client {addr} disconnected")
 
