@@ -18,7 +18,7 @@ try:
             
             m ='{"id": 2, "name": "abc"}'
             
-            conn.sendall(response.encode())
+            conn.sendall(data)
         conn.close()
         print(f"Client {addr} disconnected")
 
