@@ -16,6 +16,7 @@ try:
                 break
             print(f"Received: {data.decode()}")
             response = f"Hello, {addr}! You sent: {data.decode()}"
+            response = u"ödlan är farlig"
             response_data = bytearray(response, 'utf8')
             size = len(data)
             conn.sendall(struct.pack("!H", size))
