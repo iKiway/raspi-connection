@@ -14,7 +14,7 @@ try:
                 break
             print(f"Received: {data.decode()}")
             response = f"Hello, {addr}! You sent: {data.decode()}"
-            conn.sendall(response.encode())
+            conn.sendall(response.encode("UTF-8"))
         conn.close()
         print(f"Client {addr} disconnected")
 
