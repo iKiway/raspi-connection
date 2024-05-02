@@ -15,8 +15,10 @@ try:
             if not data:
                 break
             print(f"Received: {data.decode()}")
+            
+            # Required to send the size of the data before sending the data, because of the kotlin app, that requres modified utf8
             response = f"Hello, {addr}! You sent: {data.decode()}"
-            response_data = bytearray(data.decode(), 'utf8')
+            response_data = bytearray(response, 'utf8')
             size = len(response_data)
             conn.sendall(struct.pack("!H", size))
             conn.sendall(response_data)
