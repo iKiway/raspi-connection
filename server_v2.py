@@ -1,7 +1,6 @@
 import socket
 import threading
 import json
-from mutf8 import encode_modified_utf8, decode_modified_utf8
 
 HOST = ''  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
@@ -15,12 +14,11 @@ try:
             if not data:
                 break
             print(f"Received: {data.decode()}")
-            response = encode_modified_utf8(f"Hello, {addr}! You sent: {data.decode()}")
-            
+            response = f"Hello, {addr}! You sent: {data.decode()}"
             
             m ='{"id": 2, "name": "abc"}'
             
-            conn.sendall(response)
+            conn.sendall(json.dumps(m).encode("utf-8"))
         conn.close()
         print(f"Client {addr} disconnected")
 
