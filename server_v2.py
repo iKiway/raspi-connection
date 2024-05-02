@@ -1,6 +1,7 @@
 import socket
 import threading
 import json
+import struct
 
 HOST = ''  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
@@ -15,10 +16,10 @@ try:
                 break
             print(f"Received: {data.decode()}")
             response = f"Hello, {addr}! You sent: {data.decode()}"
-            
-            m ='{"id": 2, "name": "abc"}'
-            
-            conn.sendall(data)
+            response_data = bytearray(response, 'utf8')
+            size = len(data)
+            conn.sendall(struct.pack("!H", size))
+            conn.sendall(response_data)
         conn.close()
         print(f"Client {addr} disconnected")
 
