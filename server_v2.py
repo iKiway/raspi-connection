@@ -14,7 +14,7 @@ try:
                 break
             print(f"Received: {data.decode()}")
             response = f"Hello, {addr}! You sent: {data.decode()}"
-            conn.sendall("abc".encode("utf-8"))
+            conn.sendall(response.encode("utf-8"))
         conn.close()
         print(f"Client {addr} disconnected")
 
@@ -27,4 +27,4 @@ try:
             client_thread = threading.Thread(target=handle_client, args=(conn, addr))
             client_thread.start()
 except Exception as e:
-    print("Error in server_v2.py")
+    print("Error in server_v2.py" + e)
