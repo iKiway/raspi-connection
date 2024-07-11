@@ -21,4 +21,4 @@ def connect_to_wifi(ssid, password):
     subprocess.run(['sudo', 'systemctl', 'restart', 'networking'])
 
 # Replace 'your_ssid' and 'your_password' with your actual WiFi credentials
-connect_to_wifi('HäftigerHotspot', '123456987')
+connect_to_wifi('HaftigerHotspot', '123456987')
