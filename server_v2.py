@@ -14,14 +14,17 @@ def writeUTF(data):
 
 def message_processing(message):
     """Processes a message received from a client."""
-    message = json.loads(message)
     try:
-        if message["message"] == "Hello, Server!":
-            return f"Message received: {message['message']}"
-        elif message["number"] == 42:
-            return f"Command received: {message['number']}"
-        else:
-            return "Unknown message type"
+        message = json.loads(message)
+        for obj in data:
+            print(obj)
+        
+        # if message["message"] == "Hello, Server!":
+        #     return f"Message received: {message['message']}"
+        # elif message["number"] == 42:
+        #     return f"Command received: {message['number']}"
+        # else:
+        #     return "Unknown message type"
     except json.JSONDecodeError:
         return "Invalid JSON"
 
