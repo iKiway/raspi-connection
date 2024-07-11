@@ -14,7 +14,7 @@ try:
             data = conn.recv(1024)
             if not data:
                 break
-            print(f"Received:{data.decode()}")
+            print(f"Received: {data.decode()}")
             
             # Required to send the size of the data before sending the data, because of the kotlin app, that requres modified utf8
             response = f"Hello, {addr}! You sent: {data.decode()}"
