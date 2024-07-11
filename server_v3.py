@@ -3,6 +3,7 @@ import threading
 import json
 import struct
 import os
+import subprocess
 
 HOST = ''  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
@@ -15,8 +16,10 @@ def swich_station(station):
 def set_wifi(wifi):
     wifiName = wifi["name"]
     wifiPassword = wifi["password"]
-    os.system(f"sudo raspi-config nonint do_wifi_ssid_passphrase {wifiName} {wifiPassword} [hidden] [plain] 2>&1")
-
+    # os.system(f"sudo raspi-config nonint do_wifi_ssid_passphrase {wifiName} {wifiPassword} [hidden] [plain] 2>&1")
+    ls_output = subprocess.check_output(f"sudo raspi-config nonint do_wifi_ssid_passphrase {wifiName} {wifiPassword} [hidden] [plain]", universal_newlines=True)
+    print(ls_output)
+    
 def writeUTF(data):
     """Decodes a modified UTF-8 encoded message to UTF-8."""
     length = struct.unpack("!H", data[:2])[0]
