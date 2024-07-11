@@ -14,7 +14,7 @@ def writeUTF(data):
 
 def message_processing(message):
     """Processes a message received from a client."""
-    # message = json.loads(message)
+    message = json.loads(message)
     try:
         if message["message"] == "Hello, Server!":
             return f"Message received: {message['data']}"
@@ -38,7 +38,7 @@ try:
             test = writeUTF(data)
             print(test)
             print(f"Received: {test}")
-            # print(message_processing(data.decode()[2:]))
+            print(test)
             
             # Required to send the size of the data before sending the data, because of the kotlin app, that requres modified utf8
             response = f"Hello, {addr}! You sent: {data.decode()}"
