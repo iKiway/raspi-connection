@@ -5,20 +5,11 @@ import struct
 
 HOST = ''  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
-def decode_mutf8_to_utf8(mutf8_bytes):
-    # Convert MUTF-8 to UTF-8 where needed
-    utf8_bytes = bytearray()
-    i = 0
-    while i < len(mutf8_bytes):
-        byte = mutf8_bytes[i]
-        if byte == 0xC0 and i + 1 < len(mutf8_bytes) and mutf8_bytes[i + 1] == 0x80:
-            utf8_bytes.append(0x00)  # Convert null character representation
-            i += 2
-        else:
-            utf8_bytes.append(byte)
-            i += 1
-    return utf8_bytes.decode('utf-8')
 
+
+def writeUTF(data):
+    """Converts modified UTF-8 encoded data to UTF-8."""
+    return data.decode('utf-8', 'surrogatepass')
 
 def message_processing(message):
     """Processes a message received from a client."""
@@ -42,7 +33,7 @@ try:
             if not data:
                 break
             print(data)
-            test = decode_mutf8_to_utf8(data)
+            test = writeUTF(data)
             print(test)
             print(f"Received: {test}")
             # print(message_processing(data.decode()[2:]))
