@@ -1,8 +1,2 @@
-from wifi import Cell, Scheme
-
-cells = Cell.all('wlan0')
-
-for cell in cells:
-    print(cell.ssid)
-
-# print(len(cells))
+ls_output = subprocess.check_output(f"ted.py", universal_newlines=True)
+print(ls_output)
