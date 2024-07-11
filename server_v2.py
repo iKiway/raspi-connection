@@ -6,6 +6,20 @@ import struct
 HOST = ''  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
+
+def message_processing(data):
+    """Processes a message received from a client."""
+    try:
+        message = json.loads(data)
+        if message["message"] == "Hello, Server!":
+            return f"Message received: {message['data']}"
+        elif message["number"] == "command":
+            return f"Command received: {message['data']}"
+        else:
+            return "Unknown message type"
+    except json.JSONDecodeError:
+        return "Invalid JSON"
+
 try:
     def handle_client(conn, addr):
         """Handles a client connection by receiving and responding to messages."""
@@ -15,6 +29,7 @@ try:
             if not data:
                 break
             print(f"Received: {data.decode()}")
+            print(message_processing(data.decode()))
             
             # Required to send the size of the data before sending the data, because of the kotlin app, that requres modified utf8
             response = f"Hello, {addr}! You sent: {data.decode()}"
