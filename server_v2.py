@@ -38,7 +38,7 @@ try:
             test = writeUTF(data)
             print(test)
             print(f"Received: {test}")
-            print(test)
+            print(message_processing(test))
             
             # Required to send the size of the data before sending the data, because of the kotlin app, that requres modified utf8
             response = f"Hello, {addr}! You sent: {data.decode()}"
