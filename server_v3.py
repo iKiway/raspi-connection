@@ -25,23 +25,18 @@ def writeUTF(data):
 def message_processing(message):
     """Processes a message received from a client."""
     try:
-        message = json.loads(message)
-        for obj in message:
+        message_json = json.loads(message)
+        for obj in message_json:
             if obj == "station":
-                swich_station(message[obj])
+                swich_station(message_json[obj])
+                return "Station changed"
             if obj == "wifi":
-                set_wifi(message[obj])
-                
-                
-        
-        # if message["message"] == "Hello, Server!":
-        #     return f"Message received: {message['message']}"
-        # elif message["number"] == 42:
-        #     return f"Command received: {message['number']}"
-        # else:
-        #     return "Unknown message type"
+                set_wifi(message_json[obj])
+                return "Wifi changed"
+            else: 
+                return "Unknown message type"
     except json.JSONDecodeError:
-        return "Invalid JSON"
+        return message
 
 try:
     def handle_client(conn, addr):
@@ -56,12 +51,12 @@ try:
             test = writeUTF(data)
             print(test)
             print(f"Received: {test}")
-            print(message_processing(test))
+            response = message_processing(test)
             
             # Required to send the size of the data before sending the data, because of the kotlin app, that requres modified utf8
-            response = f"Hello, {addr}! You sent: {data.decode()}"
-            response = data.decode()
-            response = "lskdjflkkjsdfl"
+            # response = f"Hello, {addr}! You sent: {data.decode()}"
+            # response = data.decode()
+            # response = "lskdjflkkjsdfl"
             response_data = bytearray(response, 'utf8')
             size = len(response_data)
             conn.sendall(struct.pack("!H", size))
