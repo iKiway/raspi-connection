@@ -16,7 +16,7 @@ def message_processing(message):
     """Processes a message received from a client."""
     try:
         message = json.loads(message)
-        for obj in data:
+        for obj in message:
             print(obj)
         
         # if message["message"] == "Hello, Server!":
