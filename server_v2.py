@@ -8,8 +8,9 @@ PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
 
 def writeUTF(data):
-    """Converts modified UTF-8 encoded data to UTF-8."""
-    return data.decode('utf-8', 'surrogatepass')
+    """Decodes a modified UTF-8 encoded message to UTF-8."""
+    length = struct.unpack("!H", data[:2])[0]
+    return data[2:].decode('utf8')
 
 def message_processing(message):
     """Processes a message received from a client."""
