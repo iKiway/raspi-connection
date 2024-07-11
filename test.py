@@ -1,3 +1,7 @@
-import json
-message = {"message":"Hello, Server!","number":42}
-print(message["message"])
+from wifi import Cell, Scheme
+
+cells = Cell.all('wlan0')
+
+for cell in cells:
+    print(cell.ssid)
+
