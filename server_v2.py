@@ -10,7 +10,8 @@ PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 def message_processing(data):
     """Processes a message received from a client."""
     try:
-        message = json.loads(data)
+        abc = data.decode('utf-8')
+        message = json.loads(abc)
         if message["message"] == "Hello, Server!":
             return f"Message received: {message['data']}"
         elif message["number"] == 42:
