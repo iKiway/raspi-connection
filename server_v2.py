@@ -15,6 +15,7 @@ def decode_mutf8_to_utf8(mutf8_bytes):
             utf8_bytes.append(0x00)  # Convert null character representation
             i += 2
         else:
+            utf8_bytes.append(byte)
             i += 1
     return utf8_bytes.decode('utf-8')
 
@@ -43,7 +44,7 @@ try:
             print(data)
             test = decode_mutf8_to_utf8(data)
             print(test)
-            print(f"Received: {test.decode()[2:]}")
+            print(f"Received: {test}")
             # print(message_processing(data.decode()[2:]))
             
             # Required to send the size of the data before sending the data, because of the kotlin app, that requres modified utf8
