@@ -34,6 +34,7 @@ try:
             if not data:
                 break
             print(data)
+            print(data.decode())
             test = writeUTF(data)
             print(test)
             print(f"Received: {test}")
