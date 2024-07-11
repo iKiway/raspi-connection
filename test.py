@@ -1,10 +1,8 @@
-import subprocess
+from wifi import Cell, Scheme
 
-# Führen Sie `iwlist` aus, um WLAN-Netzwerke aufzulisten
-scan_results = subprocess.check_output(['iwlist', 'wlan0', 'scan'], universal_newlines=True)
+cells = Cell.all('wlan0')
 
-# Parsen Sie die Ausgabe von `iwlist` und extrahieren Sie die SSIDs
-for line in scan_results.splitlines():
-    if line.startswith('ESSID:"'):
-        ssid = line[7:-1]  # Entfernen Sie Anführungszeichen
-        print(ssid)
+for cell in cells:
+    print(cell.ssid)
+
+# print(len(cells))
