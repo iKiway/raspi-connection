@@ -34,8 +34,8 @@ def message_processing(message):
                 swich_station(message_json[obj])
                 return "station changed"
             if obj == "wifi":
-                set_wifi(message_json[obj])
-                return "Wifi changed"
+                a = set_wifi(message_json[obj])
+                return a
             else: 
                 return "Unknown message type"
     except json.JSONDecodeError:
