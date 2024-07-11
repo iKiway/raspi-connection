@@ -28,6 +28,7 @@ try:
             data = conn.recv(1024)
             if not data:
                 break
+            print(data)
             print(data.decode())
             print(f"Received: {data.decode()[2:]}")
             # print(message_processing(data.decode()[2:]))
