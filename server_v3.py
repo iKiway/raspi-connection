@@ -29,7 +29,7 @@ def message_processing(message):
         for obj in message_json:
             if obj == "station":
                 swich_station(message_json[obj])
-                return "Station changed"
+                return "station changed"
             if obj == "wifi":
                 set_wifi(message_json[obj])
                 return "Wifi changed"
