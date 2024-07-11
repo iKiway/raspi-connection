@@ -5,6 +5,18 @@ import struct
 
 HOST = ''  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
+def decode_mutf8_to_utf8(mutf8_bytes):
+    # Convert MUTF-8 to UTF-8 where needed
+    utf8_bytes = bytearray()
+    i = 0
+    while i < len(mutf8_bytes):
+        byte = mutf8_bytes[i]
+        if byte == 0xC0 and i + 1 < len(mutf8_bytes) and mutf8_bytes[i + 1] == 0x80:
+            utf8_bytes.append(0x00)  # Convert null character representation
+            i += 2
+        else:
+            i += 1
+    return utf8_bytes.decode('utf-8')
 
 
 def message_processing(message):
@@ -29,8 +41,9 @@ try:
             if not data:
                 break
             print(data)
-            print(data.decode('utf-8'))
-            print(f"Received: {data.decode()[2:]}")
+            test = decode_mutf8_to_utf8(data)
+            print(test)
+            print(f"Received: {test.decode()[2:]}")
             # print(message_processing(data.decode()[2:]))
             
             # Required to send the size of the data before sending the data, because of the kotlin app, that requres modified utf8
