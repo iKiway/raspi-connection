@@ -30,7 +30,7 @@ try:
                 break
             print(data.decode())
             print(f"Received: {data.decode()[2:]}")
-            print(message_processing(data.decode()[1:]))
+            print(message_processing(data.decode()[2:]))
             
             # Required to send the size of the data before sending the data, because of the kotlin app, that requres modified utf8
             response = f"Hello, {addr}! You sent: {data.decode()}"
