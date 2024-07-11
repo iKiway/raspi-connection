@@ -29,7 +29,7 @@ try:
             if not data:
                 break
             print(data.decode())
-            print(f"Received: {data.decode()[1:]}")
+            print(f"Received: {data.decode()[2:]}")
             print(message_processing(data.decode()[1:]))
             
             # Required to send the size of the data before sending the data, because of the kotlin app, that requres modified utf8
