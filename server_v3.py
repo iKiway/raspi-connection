@@ -2,10 +2,20 @@ import socket
 import threading
 import json
 import struct
+import os
 
 HOST = ''  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
+
+def swich_station(station):
+    with open('test.txt', 'w') as file:
+        file.write(station)
+
+def set_wifi(wifi):
+    wifiName = wifi["name"]
+    wifiPassword = wifi["password"]
+    os.system(f"sudo raspi-config nonint do_wifi_ssid_passphrase {wifiName} {wifiPassword} [hidden] [plain] 2>&1")
 
 def writeUTF(data):
     """Decodes a modified UTF-8 encoded message to UTF-8."""
@@ -17,7 +27,12 @@ def message_processing(message):
     try:
         message = json.loads(message)
         for obj in message:
-            print(obj)
+            if obj == "station":
+                swich_station(message[obj])
+            if obj == "wifi":
+                set_wifi(message[obj])
+                
+                
         
         # if message["message"] == "Hello, Server!":
         #     return f"Message received: {message['message']}"
