@@ -13,7 +13,7 @@ def message_processing(data):
         message = json.loads(data)
         if message["message"] == "Hello, Server!":
             return f"Message received: {message['data']}"
-        elif message["number"] == "command":
+        elif message["number"] == 42:
             return f"Command received: {message['data']}"
         else:
             return "Unknown message type"
