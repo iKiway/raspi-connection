@@ -18,7 +18,7 @@ def set_wifi(wifi):
     wifiPassword = wifi["password"]
     # os.system(f"sudo raspi-config nonint do_wifi_ssid_passphrase {wifiName} {wifiPassword} [hidden] [plain] 2>&1")
     a = subprocess.run(f"sudo raspi-config nonint do_wifi_ssid_passphrase {wifiName} {wifiPassword} [hidden] [plain]", capture_output=True, text=True, shell=True)
-    return a
+    return "wifi set"
     
 def writeUTF(data):
     """Decodes a modified UTF-8 encoded message to UTF-8."""
