@@ -16,6 +16,8 @@ def swich_station(station):
 def set_wifi(wifi):
     wifiName = wifi["name"]
     wifiPassword = wifi["password"]
+    print(wifiName)
+    print(wifiPassword)
     # os.system(f"sudo raspi-config nonint do_wifi_ssid_passphrase {wifiName} {wifiPassword} [hidden] [plain] 2>&1")
     a = subprocess.run(f"sudo raspi-config nonint do_wifi_ssid_passphrase {wifiName} {wifiPassword} [hidden] [plain]", capture_output=True, text=True, shell=True)
     print(a)
